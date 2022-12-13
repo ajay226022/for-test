@@ -6,6 +6,9 @@
 *Author:       Office Test
 */
 
+// echo plugins_url();
+// die;
+
 add_action("admin_menu", "wp_userinfo_table");
 
 function wp_userinfo_table()
@@ -29,15 +32,16 @@ function wp_userinfo_table()
 
     );
 
-    function wp_enqueue_script($hook)
+    function add_assets_in_backend($hook)
     {
-        wp_enqueue_style('bootstrap-min', plugin_dir_url(__FILE__) .'assets/css/bootstrap.min.css', array(), '3.2.0');
+        wp_enqueue_style('boot-min', plugins_url() . '/wp-userinfo-table/assets/css/bootstrap.min.css');
 
-        wp_enqueue_script('jquery-slim', plugin_dir_url(__FILE__) .'assets/js/jquery.slim.min.js', array(), '3.2.1');
-        wp_enqueue_script('popper-min', plugin_dir_url(__FILE__) .'assets/js/popper.min.js', array(), '3.2.2');
-        wp_enqueue_script('bootstrap-min', plugin_dir_url(__FILE__) .'assets/js/bootstrap.min.js', array(), '3.2.3');
+        wp_enqueue_script('jquery-slim', plugins_url() . '/wp-userinfo-table/assets/js/jquery.slim.min.js');
+        wp_enqueue_script('popper-min', plugins_url() . '/wp-userinfo-table/assets/js/popper.min.js');
+        wp_enqueue_script('my-bootstrap-min', plugins_url() . '/wp-userinfo-table/assets/js/bootstrap.min.js');
+        // wp_enqueue_script( 'script-js',plugin_dir_url(__FILE__).'/assets/js/script.js',array(),'1.0.0',false )
     }
-    add_action('admin_enqueue_script','wp_enqueue_script');
+    add_action('admin_enqueue_scripts', 'add_assets_in_backend');
 
     function add_new_fn()
     {
